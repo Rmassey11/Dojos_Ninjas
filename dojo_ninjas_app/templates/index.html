@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojos and Ninjas</title>
+</head>
+<body>
+    <h1>Add a Dojo</h1>
+    <form action="/createDojo" method="post">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name">
+        <label for="city">City:</label>
+        <input type="text" name="city" id="city">
+        <label for="state">State:</label>
+        <input type="text" name="state" id="state">
+        <input type="submit" value="Add">
+    </form>
+    <h1>Add a Ninja</h1>
+    <form action="/createNinja" method="post">
+        {% csrf_token %} 
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" id="first_name">
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" id="last_name">
+        <label for="dojo">Dojo:</label>
+        <select name="dojo" id="dojo">
+            {% for dojo in AllDojos %}
+            <option value="{{dojo.name}}">{{dojo.name}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Add">
+    </form>
+    <h1>All the Dojos</h1>
+    <h3>Guardian Ninjas</h3>
+    <ul>
+        {% for ninja in GuardianDojo %}
+        <li>Name: {{ninja.first_name}} {{ninja.last_name}}</li>
+        {% endfor %}
+    </ul>
+    <h3>Hive Ninjas</h3>
+    <ul>
+        {% for ninja in HiveDojo %}
+        <li>Name: {{ninja.first_name}} {{ninja.last_name}}</li>
+        {% endfor %}
+    </ul>
+    <h3>Cabal Ninjas</h3>
+    <ul>
+        {% for ninja in CabalDojo %} 
+        <li>Name: {{ninja.first_name}} {{ninja.last_name}}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
